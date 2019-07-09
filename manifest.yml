@@ -1,0 +1,19 @@
+---
+applications:
+  - name: reactive-rabbbitmq-demo-producer
+    path: producer/target/reactive-rabbitmq-demo-producer.jar
+    random-route: true
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    services:
+      - rabbitmq
+
+  - name: reactive-rabbbitmq-demo-consumer
+    path: consumer/target/reactive-rabbitmq-demo-consumer.jar
+    instances: 2
+    random-route: true
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    services:
+      - rabbitmq
+      - mongodb
